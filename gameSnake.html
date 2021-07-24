@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="game" style="width: 400; height: 400; border: 1px solid black; background-color: burlywood;" ></canvas>
+</body>
+</html>
+<script>
+  var context = document.getElementById("game").getContext("2d");
+  class Snake{
+    constructor() {
+      this.x=0;
+      this.y=0;
+      this.grid=20;
+      this.dx=this.grid;
+      this.dy=0;
+      this.loop();
+      
+    }
+    loop(){
+        this.update();
+        this.draw();
+        setTimeout(()=> this.loop(),60);
+          }
+    draw() {
+      context.clearRect(0,0,400,400);
+      context.fillStyle='green';
+      context.fillRect(this.x,this.y,this.grid,this.grid);
+    }
+    update(){
+      this.x+=this.dx;
+      this.y+=this.dy;
+      if(this.x<0){
+        this.x=400;
+      }
+      if(this.x>400){
+        this.x=0;
+      }
+      if(this.y<0){
+        this.y=400;
+      }
+      if(this.y>400) {
+        this.y=0;
+      }
+      this.catchEventKet();
+    }
+  catchEventKet() {
+    document.addEventListener('keydown',(e)=>{
+        if(e.which==37&& this.dx==0){
+          this.dx=-this.grid;
+          this.dy=0;
+        }
+        else if(e.which==38&&this.dy==0){
+          this.dx=0;
+          this.dy=-this.grid;
+        } else if(e.which==39&&this.dx==0){
+          this.dx=this.grid;
+          this.dy=0;
+        } else if(e.which==40 && this.dy==0) {
+          this.dx=0;
+          this.dy=this.grid;
+        }
+    });
+  }
+  }
+  class Apple{
+    constructor() {
+      this.x=0;
+      this.y=0;
+      this.grid=20;
+      this.update();
+      this.draw();
+      this.loop();
+    }
+    loop() {
+        if(this.x==snake.x&&this.y==snake.y){
+          this.update();
+          this.draw();
+        }
+    }
+    
+    update(){
+      this.x=20*(Math.floor(Math.random()*5 )+0);
+      this.y=20*(Math.floor(Math.random()*5 )+0);
+    }
+    draw(){ 
+      context.fillStyle='red';
+      context.fillRect=(this.x,this.y,this.grid,this.grid);
+    }
+  }
+  var snake = new Snake();
+  var apple= new Apple();
+   
+  
+</script>
