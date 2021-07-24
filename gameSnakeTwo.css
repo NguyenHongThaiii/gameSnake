@@ -1,0 +1,8 @@
+body{
+    background-color: black;
+}
+canvas{
+    border: 2px solid white;
+    background-image: url(anime.png);
+    background-size: cover;
+}
