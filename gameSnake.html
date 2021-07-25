@@ -5,17 +5,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="gameSnakeTwo.css">
 </head>
+<link rel="stylesheet" href="gameSnakeTwo.css">
 <body>
-  
+
 </body>
 </html>
 <script>
   var canvas = document.createElement('canvas');
   var context = canvas.getContext("2d");
-  var context2= canvas.getContext('2d');
-  // canvas.style.background='red';
   canvas.width=400;
   canvas.height=400;
   document.body.appendChild(canvas);
@@ -36,6 +34,7 @@
           }
     draw() {
       context.clearRect(0,0,400,400);
+      context.beginPath();
       context.fillStyle='green';
       context.fillRect(this.x,this.y,this.grid,this.grid);
     }
@@ -88,16 +87,19 @@
         if(this.x==snake.x&&this.y==snake.y){
           this.update();
           this.draw();
+          setTimeout(()=>this.loop,60);
         }
+        
     }
     
     update(){
-      this.x=20*(Math.floor(Math.random()*5 )+0);
-      this.y=20*(Math.floor(Math.random()*5 )+0);
+      this.x=20*(Math.floor(Math.random()*19 )+0);
+      this.y=20*(Math.floor(Math.random()*19 )+0);
     }
-    draw(){ 
-      context2.fillStyle='red';
-      context2.fillRect=(this.x,this.y,this.grid,this.grid);
+    draw(){
+      context.clearRect(this.x,this.y,this.grid,this.grid);
+      context.fillStyle='red';
+      context.fillRect(this.x,this.y,this.grid,this.grid);
     }
   }
   var snake = new Snake();
