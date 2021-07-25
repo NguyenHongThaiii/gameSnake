@@ -79,22 +79,22 @@
       this.x=0;
       this.y=0;
       this.grid=20;
-      this.update();
-      this.draw();
+     this.update(); 
       this.loop();
     }
     loop() {
-        if(this.x==snake.x&&this.y==snake.y){
-          this.update();
-          this.draw();
-          setTimeout(()=>this.loop,60);
-        }
+        
+        this.draw();
+        setTimeout(()=>this.loop,60);
         
     }
     
     update(){
       this.x=20*(Math.floor(Math.random()*19 )+0);
       this.y=20*(Math.floor(Math.random()*19 )+0);
+      if(this.x==snake.x&&this.y==snake.y) {
+        this.update();
+      }
     }
     draw(){
       context.clearRect(this.x,this.y,this.grid,this.grid);
